@@ -4,13 +4,16 @@ import { verifyRequestToken } from "../../../../../lib/auth/verifyToken";
 
 export async function POST(
   request: NextRequest,
-  { params }: { params: { userId: string } }
+  {
+    params
+  }: { params?: Promise<Record<string, string | string[] | undefined>> }
 ) {
   const auth = verifyRequestToken(request);
   if (!auth.ok) return auth.response;
 
   try {
-    const { userId } = await params;
+    const userIdParam = (await params)?.userId;
+    const userId = Array.isArray(userIdParam) ? userIdParam[0] : userIdParam;
     const { friendUsername } = await request.json();
 
     if (!userId || !friendUsername) {

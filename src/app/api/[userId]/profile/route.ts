@@ -4,13 +4,16 @@ import { verifyRequestToken } from "../../../../lib/auth/verifyToken";
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { userId: string } }
+  {
+    params
+  }: { params?: Promise<Record<string, string | string[] | undefined>> }
 ) {
   const auth = verifyRequestToken(request);
   if (!auth.ok) return auth.response;
 
   try {
-    const { userId } = await params;
+    const userIdParam = (await params)?.userId;
+    const userId = Array.isArray(userIdParam) ? userIdParam[0] : userIdParam;
     if (!userId) {
       return NextResponse.json({ error: "User ID is required" }, { status: 400 });
     }
@@ -43,7 +46,9 @@ export async function GET(
 
 export async function PATCH(
   request: NextRequest,
-  { params }: { params: { userId: string } }
+  {
+    params
+  }: { params?: Promise<Record<string, string | string[] | undefined>> }
 ) {
   const auth = verifyRequestToken(request);
   if (!auth.ok) return auth.response;
@@ -52,7 +57,14 @@ export async function PATCH(
     await request.json();
 
   try {
-    const { userId } = await params;
+    const userIdParam = (await params)?.userId;
+    const userId = Array.isArray(userIdParam) ? userIdParam[0] : userIdParam;
+    if (!userId) {
+      return NextResponse.json(
+        { error: "User ID is required" },
+        { status: 400 }
+      );
+    }
     const updatedProfile = await knex("profiles").where({ id: userId }).update(
       {
         full_name,
