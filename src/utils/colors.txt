@@ -1,0 +1,37 @@
+Grass Green (#4CAF50):
+
+Black (#000000)
+
+Deep Purple (#4A0E4E)
+
+Sky Blue (#03A9F4):
+
+Dark Navy (#001F3F)
+
+Burnt Orange (#D35400)
+
+Sunshine Yellow (#FFC107):
+
+Black (#000000)
+
+Deep Blue (#000080)
+
+For the neutral colors:
+
+White (#FFFFFF):
+
+Black (#000000)
+
+Navy Blue (#000080)
+
+Light Gray (#F5F5F5):
+
+Black (#000000)
+
+Deep Red (#8B0000)
+
+Medium Gray (#9E9E9E):
+
+Black (#000000)
+
+Deep Teal (#004D40)

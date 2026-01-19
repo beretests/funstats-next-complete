@@ -1,0 +1,295 @@
+@font-face {
+  font-family: "BubblegumSans";
+  src: url("/fonts/BubblegumSans-Regular.ttf") format("truetype");
+  font-weight: 400;
+  /* font-style: normal; */
+}
+
+@font-face {
+  font-family: "Fredoka";
+  src: url("/fonts/Fredoka-VariableFont_wdth,wght.ttf") format("truetype");
+  font-weight: 300 700;
+  /* font-style: normal; */
+}
+
+@font-face {
+  font-family: "Nunito";
+  src: url("/fonts/Nunito-VariableFont_wght.ttf") format("truetype");
+  font-weight: 300 700;
+  /* font-style: normal; */
+}
+
+@import "tailwindcss";
+
+/* @plugin '@tailwindcss/forms'; */
+/* @plugin '@tailwindcss/typography'; */
+
+
+/* @layer components {
+  .select2-dropdown { */
+/* ...https://tailwindcss.com/docs/adding-custom-styles#adding-component-classes */
+/* }
+} */
+
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
+@theme {
+  --font-fredoka: "Fredoka", "sans serif";
+  --font-nunito: "Nunito", "sans serif";
+  --font-special: "BubblegumSans", "sans serif";
+
+  --color-neutral-50: #f8fafc;
+  --color-neutral-100: #f1f5f9;
+  --color-neutral-200: #e2e8f0;
+  --color-neutral-300: #cbd5e1;
+  --color-neutral-400: #94a3b8;
+  --color-neutral-500: #64748b;
+  --color-neutral-600: #475569;
+  --color-neutral-700: #334155;
+  --color-neutral-800: #1e293b;
+  --color-neutral-900: #0f172a;
+  --color-neutral-950: #020617;
+
+  --drop-shadow-3xl: 0 35px 35px rgba(0, 0, 0, 0.35); 
+
+  --color-primary-50: #f0fdfa;
+  --color-primary-100: #ccfbf1;
+  --color-primary-200: #99f6e4;
+  --color-primary-300: #5eead4;
+  --color-primary-400: #2dd4bf;
+  --color-primary-500: #14b8a6;
+  --color-primary-600: #0d9488;
+  --color-primary-700: #0f766e;
+  --color-primary-800: #115e59;
+  --color-primary-900: #134e4a;
+  --color-primary-950: #042f2e;
+
+  --color-secondary-50: #eef2ff;
+  --color-secondary-100: #e0e7ff;
+  --color-secondary-200: #c7d2fe;
+  --color-secondary-300: #a5b4fc;
+  --color-secondary-400: #818cf8;
+  --color-secondary-500: #6366f1;
+  --color-secondary-600: #4f46e5;
+  --color-secondary-700: #4338ca;
+  --color-secondary-800: #3730a3;
+  --color-secondary-900: #312e81;
+  --color-secondary-950: #1e1b4b;
+
+  --color-accent-50: #fffbeb;
+  --color-accent-100: #fef3c7;
+  --color-accent-200: #fde68a;
+  --color-accent-300: #fcd34d;
+  --color-accent-400: #fbbf24;
+  --color-accent-500: #f59e0b;
+  --color-accent-600: #d97706;
+  --color-accent-700: #b45309;
+  --color-accent-800: #92400e;
+  --color-accent-900: #78350f;
+  --color-accent-950: #451a03;
+
+  --color-ok-50: #f0fdf4;
+  --color-ok-100: #dcfce7;
+  --color-ok-200: #bbf7d0;
+  --color-ok-300: #86efac;
+  --color-ok-400: #4ade80;
+  --color-ok-500: #22c55e;
+  --color-ok-600: #16a34a;
+  --color-ok-700: #15803d;
+  --color-ok-800: #166534;
+  --color-ok-900: #14532d;
+  --color-ok-950: #052e16;
+
+  --color-info-50: #eff6ff;
+  --color-info-100: #dbeafe;
+  --color-info-200: #bfdbfe;
+  --color-info-300: #93c5fd;
+  --color-info-400: #60a5fa;
+  --color-info-500: #3b82f6;
+  --color-info-600: #2563eb;
+  --color-info-700: #1d4ed8;
+  --color-info-800: #1e40af;
+  --color-info-900: #1e3a8a;
+  --color-info-950: #172554;
+
+  --color-warn-50: #fff7ed;
+  --color-warn-100: #ffedd5;
+  --color-warn-200: #fed7aa;
+  --color-warn-300: #fdba74;
+  --color-warn-400: #fb923c;
+  --color-warn-500: #f97316;
+  --color-warn-600: #ea580c;
+  --color-warn-700: #c2410c;
+  --color-warn-800: #9a3412;
+  --color-warn-900: #7c2d12;
+  --color-warn-950: #431407;
+
+  --color-fail-50: #fef2f2;
+  --color-fail-100: #fee2e2;
+  --color-fail-200: #fca5a5;
+  --color-fail-300: #f87171;
+  --color-fail-400: #ef4444;
+  --color-fail-500: #dc2626;
+  --color-fail-600: #b91c1c;
+  --color-fail-700: #991b1b;
+  --color-fail-800: #7f1d1d;
+  --color-fail-900: #63171b;
+  --color-fail-950: #450a0a;
+}
+
+@layer base {
+  [data-theme="dark"]  {
+    --color-neutral-50: #0b1220;
+    --color-neutral-100: #0f172a;
+    --color-neutral-200: #1e293b;
+    --color-neutral-300: #273449;
+    --color-neutral-400: #334155;
+    --color-neutral-500: #475569;
+    --color-neutral-600: #64748b;
+    --color-neutral-700: #cbd5e1;
+    --color-neutral-800: #e2e8f0;
+    --color-neutral-900: #f1f5f9;
+    --color-neutral-950: #f8fafc;
+  }
+
+  body {
+    @apply bg-neutral-50 text-neutral-900 transition-colors duration-200 dark:bg-neutral-950 dark:text-neutral-50;         
+  } 
+
+  h1 {
+    @apply font-special text-2xl text-center
+  }
+
+  .page-shell {
+    @apply min-h-[calc(100vh-4rem)] w-full bg-neutral-50 text-neutral-900 px-4 py-6 md:px-8 transition-colors duration-200 dark:bg-neutral-900 dark:text-neutral-50;
+  }
+
+  .surface-card {
+    @apply bg-neutral-100/90 border border-neutral-200 rounded-2xl shadow-md dark:bg-neutral-800/80 dark:border-neutral-700;
+  }
+
+  .section-title {
+    @apply font-special text-2xl md:text-3xl text-primary-900 dark:text-primary-200;
+  }
+
+  .muted-copy {
+    @apply text-neutral-800 dark:text-neutral-300;
+  }
+
+  .button {
+    @apply bg-primary-800 text-white font-special rounded-lg px-4 py-2 my-2 shadow-md hover:bg-primary-900 dark:bg-primary-800 dark:hover:bg-primary-900 transition-colors;
+  }
+
+  /* css-1ll44ll-MuiOutlinedInput-notchedOutline */
+  .MuiOutlinedInput-notchedOutline, .MuiInputBase-input, .MuiOutlinedInput-input, .MuiFormLabel-root, .MuiInputLabel-root, .Mui-disabled {
+    @apply !border-neutral-400 !text-neutral-900 !font-fredoka dark:!border-neutral-500 dark:!text-neutral-50
+  }
+
+  .MuiFormHelperText-root {
+    @apply !text-neutral-800 dark:!text-neutral-300
+  }
+
+  .MuiFormHelperText-root.Mui-error {
+    @apply !text-fail-900 dark:!text-fail-200
+  }
+
+  .MuiAvatar-root {
+    @apply !bg-primary-800 !text-white !p-4 shadow-md shadow-neutral-900/60 
+  }
+
+  .MuiButtonBase-root, .MuiButton-root{
+    @apply !font-special !flex !items-center
+  }
+
+  .MuiListItemText-primary {
+    @apply !font-special !text-white
+  }
+
+  .MuiListItemIcon-root {
+    @apply !text-white
+  }
+
+  /* .Mui-disabled {
+    @apply !text-ok-100
+  } */
+  /* .MuiAvatar-img {
+    @apply bg-clip-content bg-transparent shadow-md 
+  } */
+}
+
+/* .card {
+  @apply text-primary bg-secondary;
+} */
+
+/* .button {
+  @apply text-secondary-100 bg-primary-200;
+} */
+
+/* @media (prefers-color-scheme: dark) {
+  :root {
+    --primary: #FF5733;      
+    --secondary: #3498DB;    
+    --accent: #F1C40F;       
+    --success: #2ECC71;      
+    --warning: #E67E22;      
+    --info: #9B59B6; 
+  }
+} */
+
+/* @layer base {
+  h1 {
+    font-size: var(--text-2xl);
+  }
+  h2 {
+    font-size: var(--text-xl);
+  }
+  * {
+    @apply border-border;         
+  }
+  body {
+    @apply bg-purple-50 text-secondary-footer;         
+    @apply bg-background text-foreground;         
+  }  
+} */
+/* #root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+} */
