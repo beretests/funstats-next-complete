@@ -159,7 +159,7 @@ const EditGameStatPage: React.FC = () => {
   const awayTeam = useWatch({ control, name: "away_team_name" });
   const playerTeam = useWatch({ control, name: "player_team_name" });
 
-  const { fields, append, remove } = useFieldArray({
+  const { fields, append, remove } = useFieldArray<FormValues, "awards">({
     control,
     name: "awards",
   });
@@ -241,7 +241,7 @@ const EditGameStatPage: React.FC = () => {
           rules={{ required: "Home team is required" }}
           render={({ field, fieldState }) => (
             <div className="flex gap-2 justify-end">
-              <Autocomplete
+              <Autocomplete<TeamOption>
                 options={filterOptions("home")}
                 // loading={loading}
                 getOptionLabel={(option) => option.label}
@@ -317,7 +317,7 @@ const EditGameStatPage: React.FC = () => {
           rules={{ required: "Away team is required" }}
           render={({ field, fieldState }) => (
             <div className="flex gap-2">
-              <Autocomplete
+              <Autocomplete<TeamOption>
                 options={filterOptions("away")}
                 // loading={loading}
                 getOptionLabel={(option) => option.label}
@@ -434,11 +434,11 @@ const EditGameStatPage: React.FC = () => {
                 }}
               >
                 <Controller
-                  name={`awards.${index}`}
+                  name={`awards.${index}` as const}
                   control={control}
                   rules={{ required: "Award Name is required" }}
                   render={({ field, fieldState }) => (
-                    <Autocomplete
+                    <Autocomplete<Award>
                       {...field}
                       options={availableAwards}
                       getOptionLabel={(option) => option.award_name || ""}

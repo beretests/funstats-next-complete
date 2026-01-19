@@ -120,7 +120,7 @@ const AddStatstPage: React.FC = () => {
 
   const [formPayload, setFormPayload] = useState<FormSubmissionPayload>({
     date: dayjs(),
-    playerId: user.id,
+    playerId: user?.id ?? "",
     homeTeamId: "",
     seasonId: "",
     awayTeamId: "",
@@ -143,6 +143,15 @@ const AddStatstPage: React.FC = () => {
 
   const [isHomeTeamChecked, setIsHomeTeamChecked] = useState(false);
   const [isAwayTeamChecked, setIsAwayTeamChecked] = useState(false);
+
+  useEffect(() => {
+    if (user?.id) {
+      setFormPayload((prev) => ({
+        ...prev,
+        playerId: user.id,
+      }));
+    }
+  }, [user?.id]);
 
   const handleOptionChange = (
     fieldName: keyof FormSubmissionPayload,
@@ -199,6 +208,10 @@ const AddStatstPage: React.FC = () => {
 
   const handleSubmit = async (retries = 3) => {
     console.log("Form Submission Payload:", formPayload);
+    if (!formPayload.playerId) {
+      showAlert("error", "Please sign in to submit stats.");
+      return;
+    }
     setLoading(true);
     try {
       const submitted = await api.post("/api/stats/add", formPayload);

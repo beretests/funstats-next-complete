@@ -131,6 +131,12 @@ const ProfileForm: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    const currentUser = user;
+    if (!currentUser) {
+      showAlert("error", "User not found. Please sign in again.");
+      return;
+    }
+
     const nextErrors = {
       full_name: state.formData.full_name.trim()
         ? ""
@@ -153,10 +159,10 @@ const ProfileForm: React.FC = () => {
 
     setLoading(true);
     try {
-      const updated = await updateProfileData(user.id, state.formData);
+      const updated = await updateProfileData(currentUser.id, state.formData);
       console.log("Updated Profile Data:", updated);
       // updateUserProfile(state.formData);
-      setUser({ ...user, ...updated });
+      setUser({ ...currentUser, ...updated });
 
       setIsEditing(false);
       setLoading(false);

@@ -6,13 +6,22 @@ import { Session, User } from "@supabase/supabase-js";
 import dayjs from "dayjs";
 
 type UserMetadata = Record<string, unknown>;
+type ProfileFields = {
+  full_name?: string | null;
+  date_of_birth?: number | null;
+  favorite_soccer_player?: string | null;
+  position?: string | null;
+  avatar_url?: string | null;
+  username?: string | null;
+};
+type AuthUser = User & ProfileFields;
 
 type AuthState = {
   session: Session | null;
-  user: User | null;
+  user: AuthUser | null;
   username: string | null;
   isAuthenticated: boolean;
-  setUser: (user: User | null) => void;
+  setUser: (user: AuthUser | null) => void;
   updateUser: (partialUser: Partial<UserMetadata>) => void;
   setUsername: (username: string | null) => void;
   setSession: (session: Session | null) => void;

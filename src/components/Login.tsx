@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { supabase } from "../services/supabase";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useAlertStore } from "../stores/alertStore";
 import { useLoadingStore } from "../stores/loadingStore";
 import api from "../services/api";
@@ -21,7 +21,6 @@ const Login: React.FC = () => {
   const { isLoading, setLoading } = useLoadingStore();
 
   const router = useRouter();
-  const searchParams = useSearchParams();
   const [identifier, setIdentifier] = useState("");
 
   const [email, setEmail] = useState("");
@@ -47,10 +46,12 @@ const Login: React.FC = () => {
   };
 
   useEffect(() => {
-    if (searchParams?.get("reason") === "auth") {
+    if (typeof window === "undefined") return;
+    const reason = new URLSearchParams(window.location.search).get("reason");
+    if (reason === "auth") {
       showAlert("warning", "You must be logged in to view this content.");
     }
-  }, [searchParams, showAlert]);
+  }, [showAlert]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     setLoading(true);

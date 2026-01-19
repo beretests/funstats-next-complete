@@ -114,6 +114,10 @@ const FriendsPage: React.FC = () => {
   };
 
   const handleRemoveFriend = async (friendUsername: string) => {
+    if (!user?.id) {
+      showAlert("error", "User not found. Please sign in again.");
+      return;
+    }
     try {
       const response = await api.delete(`/api/${user.id}/friends/`, {
         params: { friendUsername },

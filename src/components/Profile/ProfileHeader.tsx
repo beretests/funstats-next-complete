@@ -52,11 +52,15 @@ const ProfileHeader = () => {
     setUploading(true);
 
     try {
+      if (!player) {
+        showAlert("error", "User not found. Please sign in again.");
+        setUploading(false);
+        return;
+      }
+
       if (e.target.files && e.target.files[0]) {
         setFile(e.target.files[0]);
-        const fileName = `${player?.id}-${Date.now()}-${
-          e.target.files[0].name
-        }`;
+        const fileName = `${player.id}-${Date.now()}-${e.target.files[0].name}`;
 
         const { data, error } = await supabase.storage
           .from("avatars")
@@ -81,7 +85,7 @@ const ProfileHeader = () => {
         const { error: dbError } = await supabase
           .from("profiles")
           .update({ avatar_url: publicUrl.publicUrl })
-          .eq("id", player?.id);
+          .eq("id", player.id);
 
         if (dbError) {
           console.error("Error updating profile:", dbError.message);
@@ -127,7 +131,7 @@ const ProfileHeader = () => {
             {!player?.avatar_url && player?.user_metadata?.full_name
               ? player.user_metadata.full_name
                   .split(" ")
-                  .map((part) => part[0])
+                  .map((part: string) => part[0])
                   .join("")
               : ""}
           </Avatar>

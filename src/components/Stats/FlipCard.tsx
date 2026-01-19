@@ -64,9 +64,17 @@ const FlipCard: React.FC<FlipCardProps> = ({
     setFlippedCards((prev) => ({ ...prev, [index]: isAboutToFlip }));
 
     if (isAboutToFlip) {
+      if (!user?.id) {
+        showAlert("error", "Please sign in to view stats.");
+        return;
+      }
+      if (!selectedSeason?.id) {
+        showAlert("error", "Select a season to view stats.");
+        return;
+      }
       fetchGameStats(
         user.id,
-        selectedSeason?.id ?? "",
+        selectedSeason.id,
         label.toLowerCase().replace(/ /g, "_").replace("goals", "goals_scored")
       );
     }
