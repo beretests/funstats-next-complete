@@ -6,7 +6,7 @@ export async function POST(
   request: NextRequest,
   {
     params
-  }: { params?: Promise<Record<string, string | string[] | undefined>> }
+  }: { params: Promise<Record<string, string | string[] | undefined>> }
 ) {
   const auth = verifyRequestToken(request);
   if (!auth.ok) return auth.response;
